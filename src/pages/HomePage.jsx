@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { MovieItem } from 'components/MovieItem/MovieItem';
-import axios from 'axios';
 import { getData } from 'services/api';
 
 export const HomePage = () => {
@@ -12,7 +11,7 @@ export const HomePage = () => {
         const fetchMovies = async () => {
             try {
                 const moviesData = await getData();
-                setError(moviesData)
+                setMovies(moviesData)
             } catch (error) {
                 setError(error)
             } finally {
@@ -20,10 +19,11 @@ export const HomePage = () => {
             }
         }
         fetchMovies()
-    }), []);
+    }), [movies]);
 
     return (
         <div>
+            {error && console.log(error)}
             <MovieItem />
             <MovieItem />
         </div>
