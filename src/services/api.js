@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URl = 'https://api.themoviedb.org/3/trending/all/day/';
-const API_KEY = '4d836ee8b695dbb4b348c2a4aa247c23';
+const API_KEY = '177f9a94bc6cffceeb45ffe96a6de0f1';
 
 axios.defaults.baseURL = BASE_URl;
 
