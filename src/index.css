@@ -8,6 +8,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+a {
+  color: #3e3e3e;
+  text-decoration: none;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
+}
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
@@ -60,11 +66,11 @@ nav ul li a:hover {
   background-color: #999;
 }
 
-main {
+.homePage {
   margin: 20px;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 h2 {
@@ -78,7 +84,8 @@ h2 {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
   margin-bottom: 20px;
-  width: 45%;
+  width: 300px;
+  height: 300px;
   transition: transform 0.3s ease;
 }
 

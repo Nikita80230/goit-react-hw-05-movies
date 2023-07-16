@@ -1,7 +1,8 @@
 import React from 'react';
-import HomePage from 'pages/HomePage';
+import HomePage from 'pages/HomePage/HomePage';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-import MoviesPage from 'pages/MoviesPage';
+import MoviesPage from 'pages/MoviesPage/MoviesPage';
+import MovieDetails from 'pages/MovieDetails/MovieDetails';
 
 export const App = () => {
   return (
@@ -24,6 +25,7 @@ export const App = () => {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/movies" element={<MoviesPage />} />
+          <Route path="/movies/:movieId" element={<MovieDetails />} />
         </Routes>
       </div>
     </BrowserRouter>
