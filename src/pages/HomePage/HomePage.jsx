@@ -11,8 +11,8 @@ export const HomePage = () => {
         const fetchMovies = async () => {
             try {
                 const moviesData = await getMovies();
-                setMovies(moviesData.data.results);
-                console.log(moviesData.data);
+                setMovies(moviesData.results);
+                console.log(moviesData.results);
             } catch (error) {
                 setError(error);
             } finally {
