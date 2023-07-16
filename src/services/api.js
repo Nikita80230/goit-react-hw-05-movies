@@ -1,16 +1,17 @@
 import axios from 'axios';
 
-const BASE_URl = 'https://api.themoviedb.org/3/trending/all/day';
 const API_KEY = 'e0723ed903f05e10ff2c0d0ee3dce9dc';
 
-axios.defaults.baseURL = BASE_URl;
+const instance = axios.create({
+  baseURL: 'https://api.themoviedb.org/3',
+  params: {
+    api_key: API_KEY,
+  },
+});
 
 export async function getMovies() {
-  const params = {
-    api_key: API_KEY,
-    per_page: 12,
-  };
-  return await axios.get('', { params });
+  const { data } = await instance.get('/trending/all/day');
+  return data;
 }
 
 // q: input,
