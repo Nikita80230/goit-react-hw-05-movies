@@ -28,8 +28,10 @@ main {
 }
 
 .filmPoster {
-  flex-basis: 30%;
+  /* flex-basis: 30%; */
   margin-bottom: 20px;
+  height: 360px;
+  width: 294px;
 }
 
 .filmPoster img {
@@ -43,6 +45,7 @@ main {
   border-radius: 5px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
+  height: 400px;
 }
 
 .filmInfo h2 {
