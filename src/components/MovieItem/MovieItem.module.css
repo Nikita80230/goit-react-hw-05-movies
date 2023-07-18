@@ -1,0 +1,14 @@
+.filmCard img {
+  width: 175px;
+  height: 200px;
+}
+
+.filmCard {
+  width: 300px;
+  height: 400px;
+}
+
+.filmCard p {
+  width: 300px;
+  height: 100px;
+}
