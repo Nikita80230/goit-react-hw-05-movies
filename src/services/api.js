@@ -19,6 +19,11 @@ export async function getMoviesById(id) {
   return data;
 }
 
+export async function getMoviesByName(query) {
+  const { data } = await instance.get(`/search/movie?query=${query}`);
+  return data;
+}
+
 // q: input,
 // image_type: 'photo',
 // orientation: 'horizontal',

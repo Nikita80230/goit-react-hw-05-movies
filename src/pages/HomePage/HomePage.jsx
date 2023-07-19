@@ -7,6 +7,8 @@ export const HomePage = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
 
+
+
     useEffect(() => {
         const fetchMovies = async () => {
             try {
