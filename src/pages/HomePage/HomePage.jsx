@@ -7,8 +7,6 @@ export const HomePage = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
 
-
-
     useEffect(() => {
         const fetchMovies = async () => {
             try {
@@ -25,7 +23,7 @@ export const HomePage = () => {
     }, []);
 
     return (
-        <div className='homePage'>
+        <div className="homePage">
             {error && console.log(error)}
             {movies.map(movie => {
                 return (
