@@ -24,6 +24,11 @@ export async function getMoviesByName(query) {
   return data;
 }
 
+export async function getMoviesCastById(id) {
+  const { data } = await instance.get(`/movie/${id}/credits`);
+  return data;
+}
+
 // q: input,
 // image_type: 'photo',
 // orientation: 'horizontal',
