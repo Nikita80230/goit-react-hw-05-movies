@@ -5,11 +5,6 @@ import css from "./MovieCard.module.css"
 
 export const MovieCard = ({ movie }) => {
 
-
-    // const { title, release_date, overview, genres, poster_path } = movie;
-    // const splitedGenres = movie.genres.map((genre) => { console.log(genre) })
-
-    // console.log(splitedGenres)
     return (
 
         <div className={css.filmDetails}>

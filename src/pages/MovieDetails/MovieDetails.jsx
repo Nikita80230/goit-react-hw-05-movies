@@ -1,12 +1,15 @@
+import { Cast } from 'components/Cast/Cast';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import React, { useEffect, useState } from 'react';
-import { Link, Outlet, useParams } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
 
 import { getMoviesById } from 'services/api';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
     const [movie, setMovie] = useState({});
+    let location = useLocation();
+
     // const [isCastOpened, setIsCastOpened] = useState()
 
     // const handleCastClick = (prevIsCastOpened) => {
@@ -29,13 +32,22 @@ const MovieDetails = () => {
         fetchMoviesById();
     }, [movieId]);
 
+    console.log(location);
     return (
         <>
             {movie && <MovieCard movie={movie} />}
             <br />
             <br />
             <br />
-            <Link to="cast">Cast</Link>
+            {location.pathname.includes('cast') ? (
+                <Link to="">
+                    <h3>CAST</h3>
+                </Link>
+            ) : (
+                <Link to="cast">
+                    <h3>CAST</h3>
+                </Link>
+            )}
             <Outlet />
         </>
     );
