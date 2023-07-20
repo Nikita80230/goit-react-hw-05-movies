@@ -1,4 +1,4 @@
-import { Cast } from 'components/Cast/Cast';
+
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
