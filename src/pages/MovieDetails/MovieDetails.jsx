@@ -32,22 +32,21 @@ const MovieDetails = () => {
         fetchMoviesById();
     }, [movieId]);
 
-    console.log(location);
     return (
         <>
             {movie && <MovieCard movie={movie} />}
             <br />
             <br />
             <br />
-            {location.pathname.includes('cast') ? (
-                <Link to="">
-                    <h3>CAST</h3>
-                </Link>
-            ) : (
-                <Link to="cast">
-                    <h3>CAST</h3>
-                </Link>
-            )}
+
+            <Link to={location.pathname.includes('cast') ? "" : "cast"}>
+                <h3>CAST</h3>
+            </Link>
+
+            <Link to={location.pathname.includes('reviews') ? "" : "reviews"}>
+                <h3>REVIEWS</h3>
+            </Link>
+
             <Outlet />
         </>
     );
