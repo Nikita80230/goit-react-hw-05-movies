@@ -2,10 +2,9 @@ const { useState, useEffect } = require('react');
 const { useParams } = require('react-router-dom');
 const { getMoviesCastById } = require('services/api');
 
-export const Cast = () => {
+const Cast = () => {
     const { movieId } = useParams();
     const [cast, setCast] = useState([]);
-    // const [isCastOpened, setIsCastOpened] = useState(null)
 
     useEffect(() => {
         if (!movieId) return;
@@ -34,3 +33,5 @@ export const Cast = () => {
         </ul>
     );
 };
+
+export default Cast;

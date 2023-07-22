@@ -1,18 +1,22 @@
-import { MovieItem } from 'components/MovieItem/MovieItem';
-import React, { useEffect, useState } from 'react';
+import React, { lazy, useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 
 import { getMoviesByName } from 'services/api';
 
-// import css from "./MoviesPage.module.css"
+const MovieItem = lazy(
+    () =>
+        new Promise((resolve, reject) => {
+            import('components/MovieItem/MovieItem')
+                .then(result => resolve(result.default ? result : { default: result }))
+                .catch(reject);
+        })
+);
 
 export const MoviesPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
-
-
 
     const handleChange = e => {
         setSearchTerm(e.target.value);
@@ -23,17 +27,15 @@ export const MoviesPage = () => {
         setSearchParams({ query: searchTerm });
     };
 
-    const query = searchParams.get('query')
+    const query = searchParams.get('query');
 
     useEffect(() => {
-
         if (!query) return;
 
         const fetchMovies = async () => {
             try {
                 const moviesData = await getMoviesByName(query);
                 setMovies(moviesData.results);
-                console.log(moviesData.results);
             } catch (error) {
                 setError(error);
             } finally {
@@ -57,9 +59,7 @@ export const MoviesPage = () => {
                     placeholder="Enter film name"
                 />
                 <br />
-                <button type="submit">
-                    Search
-                </button>
+                <button type="submit">Search</button>
             </form>
             {error && console.log(error)}
             {movies.map(movie => {

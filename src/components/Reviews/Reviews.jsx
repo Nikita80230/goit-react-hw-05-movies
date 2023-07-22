@@ -2,7 +2,7 @@ const { useState, useEffect } = require('react');
 const { useParams } = require('react-router-dom');
 const { getMoviesReviewsById } = require('services/api');
 
-export const Reviews = () => {
+const Reviews = () => {
     const { movieId } = useParams();
     const [reviews, setReviews] = useState([]);
     // const [isCastOpened, setIsCastOpened] = useState(null)
@@ -19,12 +19,11 @@ export const Reviews = () => {
             } finally {
             }
         };
-        // console.log(movieCastData);
         fetchMoviesById();
     }, [movieId]);
 
     return (
-        reviews ? <ul>
+        reviews.length !== 0 ? <ul>
             {reviews.map((review) => {
                 return (<li key={review.id}>
                     <h3>{review.author}</h3>
@@ -34,3 +33,5 @@ export const Reviews = () => {
         </ul> : <h3>There are no reviews of this film</h3>
     );
 };
+
+export default Reviews;

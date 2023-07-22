@@ -1,9 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { MovieItem } from 'components/MovieItem/MovieItem';
+import React, { lazy, useEffect, useState } from 'react';
 import { getMovies } from 'services/api';
 import { Link } from 'react-router-dom';
 
-export const HomePage = () => {
+// const MovieItem = lazy(() => ('components/MovieItem/MovieItem'))
+const MovieItem = lazy(() => new Promise((resolve, reject) => {
+    import('components/MovieItem/MovieItem')
+        .then(result => resolve(result.default ? result : { default: result }))
+        .catch(reject)
+}));
+
+const HomePage = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
 
@@ -12,11 +18,9 @@ export const HomePage = () => {
             try {
                 const moviesData = await getMovies();
                 setMovies(moviesData.results);
-                console.log(moviesData.results);
             } catch (error) {
                 setError(error);
             } finally {
-                console.log('fetch worked');
             }
         };
         fetchMovies();
