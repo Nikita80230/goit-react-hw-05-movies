@@ -21,9 +21,10 @@ export const MoviesPage = () => {
         e.preventDefault();
         setSearchParams({ query: searchTerm });
     };
+    const query = searchParams.get('query');
 
     useEffect(() => {
-        const query = searchParams.get('query');
+
 
         if (!query) return;
 
@@ -39,7 +40,7 @@ export const MoviesPage = () => {
             }
         };
         fetchMovies();
-    }, [searchParams]);
+    }, [query]);
 
     return (
         <div>
