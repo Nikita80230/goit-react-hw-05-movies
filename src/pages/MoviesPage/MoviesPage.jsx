@@ -1,3 +1,4 @@
+import { Loader } from 'components/Loader/Loader';
 import MovieList from 'components/MovieList/MovieList';
 import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
@@ -9,6 +10,8 @@ export const MoviesPage = () => {
     const [searchParams, setSearchParams] = useSearchParams();
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
+
 
     const handleChange = e => {
         setSearchTerm(e.target.value);
@@ -26,10 +29,13 @@ export const MoviesPage = () => {
 
         const fetchMovies = async () => {
             try {
+                setLoading(true)
                 const moviesData = await getMoviesByName(query);
                 setMovies(moviesData.results);
             } catch (error) {
                 setError(error.message);
+            } finally {
+                setLoading(false)
             }
         };
         fetchMovies();
@@ -51,6 +57,7 @@ export const MoviesPage = () => {
                 <br />
                 <button type="submit">Search</button>
             </form>
+            {loading && <Loader />}
             {error && <h3>{error}</h3>}
             <MovieList movies={movies} />
         </div>

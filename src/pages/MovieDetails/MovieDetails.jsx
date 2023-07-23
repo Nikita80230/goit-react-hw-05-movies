@@ -1,4 +1,5 @@
 import BackButton from 'components/BackButton/BackButton';
+import { Loader } from 'components/Loader/Loader';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import React, { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
@@ -7,7 +8,10 @@ import { getMoviesById } from 'services/api';
 
 const MovieDetails = () => {
     const { movieId } = useParams();
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
     const [movie, setMovie] = useState({});
+
     const location = useLocation();
     const backLinkHref = location?.state?.from ?? '/';
 
@@ -16,11 +20,13 @@ const MovieDetails = () => {
 
         const fetchMoviesById = async () => {
             try {
+                setLoading(true)
                 const movieData = await getMoviesById(movieId.slice(1));
                 setMovie(movieData);
             } catch (error) {
-                console.log(error);
+                setError(error);
             } finally {
+                setLoading(false)
             }
         };
         fetchMoviesById();
@@ -28,6 +34,10 @@ const MovieDetails = () => {
 
     return (
         <>
+            {loading && <Loader />}
+            {error && <h3>{error}</h3>}
+            <br />
+            <br />
             <Link to={backLinkHref}>
                 <BackButton />
             </Link>
@@ -36,15 +46,13 @@ const MovieDetails = () => {
             {movie && <MovieCard movie={movie} />}
             <br />
             <br />
-            <br />
-
             <Link
                 state={{ from: backLinkHref }}
                 to={location.pathname.includes('cast') ? '' : 'cast'}
             >
                 <h3>CAST</h3>
             </Link>
-
+            <br />
             <Link
                 state={{ from: backLinkHref }}
                 to={location.pathname.includes('reviews') ? '' : 'reviews'}

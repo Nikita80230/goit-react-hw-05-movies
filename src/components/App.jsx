@@ -5,23 +5,8 @@ const HomePage = lazy(() => import('pages/HomePage/HomePage'));
 const MovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
 const MoviesPage = lazy(() => import('pages/MoviesPage/MoviesPage'));
 
-const Reviews = lazy(
-  () =>
-    new Promise((resolve, reject) => {
-      import('./Reviews/Reviews')
-        .then(result => resolve(result.default ? result : { default: result }))
-        .catch(reject);
-    })
-);
-
-const Cast = lazy(
-  () =>
-    new Promise((resolve, reject) => {
-      import('./Cast/Cast')
-        .then(result => resolve(result.default ? result : { default: result }))
-        .catch(reject);
-    })
-);
+const Reviews = lazy(() => import('./Reviews/Reviews'));
+const Cast = lazy(() => import('./Cast/Cast'));
 
 export const App = () => {
   return (

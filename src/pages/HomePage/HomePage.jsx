@@ -1,19 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import { getMovies } from 'services/api';
 import MovieList from 'components/MovieList/MovieList';
+import { Loader } from 'components/Loader/Loader';
 
 const HomePage = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(null);
 
     useEffect(() => {
         const fetchMovies = async () => {
             try {
+                setLoading(true);
                 const moviesData = await getMovies();
                 setMovies(moviesData.results);
             } catch (error) {
-                setError(error);
+                setError(error.message);
             } finally {
+                setLoading(false);
             }
         };
         fetchMovies();
@@ -21,8 +25,10 @@ const HomePage = () => {
 
     return (
         <div className="homePage">
-            {error && console.log(error)}
+            {loading && <Loader />}
+            {error && <h3>{error}</h3>}
             <MovieList movies={movies} />
+
         </div>
     );
 };
