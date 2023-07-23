@@ -1,12 +1,5 @@
 import React, { Suspense, lazy } from 'react';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
-
-// import MoviesPage from 'pages/MoviesPage/MoviesPage';
-// import MovieDetails from 'pages/MovieDetails/MovieDetails';
-// import HomePage from 'pages/HomePage/HomePage';
-
-// import { Cast } from './Cast/Cast';
-// import { Reviews } from './Reviews/Reviews';
+import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
 
 const HomePage = lazy(() => import("pages/HomePage/HomePage"));
 const MovieDetails = lazy(() => import("pages/MovieDetails/MovieDetails"));
@@ -23,15 +16,6 @@ const Cast = lazy(() => new Promise((resolve, reject) => {
     .then(result => resolve(result.default ? result : { default: result }))
     .catch(reject)
 }));
-
-// const Cast = lazy(() => import("./Cast/Cast"));
-
-// const OtherComponent = lazy(() => new Promise((resolve, reject) => {
-//   import('./OtherComponent')
-//     .then(result => resolve(result.default ? result : { default: result }))
-//     .catch(reject);
-// }));
-// const MyComponent = lazy(() => import('./MyComponent'))
 
 export const App = () => {
   return (
@@ -60,6 +44,7 @@ export const App = () => {
               <Route path="cast" element={<Cast />} />
               <Route path="reviews" element={<Reviews />} />
             </Route>
+            <Route path="*" element={<Navigate to="/" replace={true} />} />
           </Routes>
         </Suspense>
       </div>

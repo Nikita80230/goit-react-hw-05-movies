@@ -1,16 +1,10 @@
-import React, { lazy, useEffect, useState } from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import MovieList from 'components/MovieList/MovieList';
+import React, { useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
 import { getMoviesByName } from 'services/api';
 
-const MovieItem = lazy(
-    () =>
-        new Promise((resolve, reject) => {
-            import('components/MovieItem/MovieItem')
-                .then(result => resolve(result.default ? result : { default: result }))
-                .catch(reject);
-        })
-);
+
 
 export const MoviesPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
@@ -27,9 +21,10 @@ export const MoviesPage = () => {
         setSearchParams({ query: searchTerm });
     };
 
-    const query = searchParams.get('query');
 
     useEffect(() => {
+        const query = searchParams.get('query');
+
         if (!query) return;
 
         const fetchMovies = async () => {
@@ -37,13 +32,13 @@ export const MoviesPage = () => {
                 const moviesData = await getMoviesByName(query);
                 setMovies(moviesData.results);
             } catch (error) {
-                setError(error);
-            } finally {
-                console.log('fetch worked');
+                setError(error.message);
             }
         };
         fetchMovies();
-    }, [query]);
+    }, [searchParams]);
+
+
 
     return (
         <div>
@@ -61,14 +56,8 @@ export const MoviesPage = () => {
                 <br />
                 <button type="submit">Search</button>
             </form>
-            {error && console.log(error)}
-            {movies.map(movie => {
-                return (
-                    <Link key={movie.id} to={`/movies/:${movie.id}`}>
-                        <MovieItem movie={movie} />
-                    </Link>
-                );
-            })}
+            {error && <h3>{error}</h3>}
+            <MovieList movies={movies} />
         </div>
     );
 };

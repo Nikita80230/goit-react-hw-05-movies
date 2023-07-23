@@ -18,19 +18,18 @@ const Cast = () => {
             } finally {
             }
         };
-        // console.log(movieCastData);
         fetchMoviesById();
     }, [movieId]);
 
     return (
-        <ul>
+        cast.length !== 0 ? <ul>
             {cast.map((actor) => {
                 return (<li key={actor.id}>
                     <img src={`https://image.tmdb.org/t/p/w500${actor.profile_path}`} alt="" />
                     <p>{actor.name}</p>
                 </li>)
             })}
-        </ul>
+        </ul> : <h3> There are no cast of this film</h3>
     );
 };
 

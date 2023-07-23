@@ -1,17 +1,20 @@
-import React, { lazy, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { getMovies } from 'services/api';
-import { Link } from 'react-router-dom';
+// import { Link, useLocation } from 'react-router-dom';
+import MovieList from 'components/MovieList/MovieList';
 
 // const MovieItem = lazy(() => ('components/MovieItem/MovieItem'))
-const MovieItem = lazy(() => new Promise((resolve, reject) => {
-    import('components/MovieItem/MovieItem')
-        .then(result => resolve(result.default ? result : { default: result }))
-        .catch(reject)
-}));
+// const MovieItem = lazy(() => new Promise((resolve, reject) => {
+//     import('components/MovieItem/MovieItem')
+//         .then(result => resolve(result.default ? result : { default: result }))
+//         .catch(reject)
+// }));
 
 const HomePage = () => {
     const [movies, setMovies] = useState([]);
     const [error, setError] = useState(null);
+    // const location = useLocation()
+    // console.log("Home Page location", location)
 
     useEffect(() => {
         const fetchMovies = async () => {
@@ -29,13 +32,7 @@ const HomePage = () => {
     return (
         <div className="homePage">
             {error && console.log(error)}
-            {movies.map(movie => {
-                return (
-                    <Link key={movie.id} to={`/movies/:${movie.id}`}>
-                        <MovieItem movie={movie} />
-                    </Link>
-                );
-            })}
+            <MovieList movies={movies} />
         </div>
     );
 };

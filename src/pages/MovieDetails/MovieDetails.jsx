@@ -1,3 +1,4 @@
+import BackButton from 'components/BackButton/BackButton';
 import { MovieCard } from 'components/MovieCard/MovieCard';
 import React, { Suspense, useEffect, useState } from 'react';
 import { Link, Outlet, useLocation, useParams } from 'react-router-dom';
@@ -7,7 +8,9 @@ import { getMoviesById } from 'services/api';
 const MovieDetails = () => {
     const { movieId } = useParams();
     const [movie, setMovie] = useState({});
-    let location = useLocation();
+    const location = useLocation();
+    const backLinkHref = location?.state?.from ?? '/'
+
 
     useEffect(() => {
         if (!movieId) return;
@@ -26,16 +29,21 @@ const MovieDetails = () => {
 
     return (
         <>
+            <Link to={backLinkHref}>
+                <BackButton />
+            </Link>
+            <br />
+            <br />
             {movie && <MovieCard movie={movie} />}
             <br />
             <br />
             <br />
 
-            <Link to={location.pathname.includes('cast') ? '' : 'cast'}>
+            <Link state={{ from: backLinkHref }} to={location.pathname.includes('cast') ? '' : 'cast'}>
                 <h3>CAST</h3>
             </Link>
 
-            <Link to={location.pathname.includes('reviews') ? '' : 'reviews'}>
+            <Link state={{ from: backLinkHref }} to={location.pathname.includes('reviews') ? '' : 'reviews'}>
                 <h3>REVIEWS</h3>
             </Link>
             <Suspense fallback={<div>Loading subpage...</div>}>
