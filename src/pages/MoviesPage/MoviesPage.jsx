@@ -4,8 +4,6 @@ import { useSearchParams } from 'react-router-dom';
 
 import { getMoviesByName } from 'services/api';
 
-
-
 export const MoviesPage = () => {
     const [searchTerm, setSearchTerm] = useState('');
     const [searchParams, setSearchParams] = useSearchParams();
@@ -20,7 +18,6 @@ export const MoviesPage = () => {
         e.preventDefault();
         setSearchParams({ query: searchTerm });
     };
-
 
     useEffect(() => {
         const query = searchParams.get('query');
@@ -37,8 +34,6 @@ export const MoviesPage = () => {
         };
         fetchMovies();
     }, [searchParams]);
-
-
 
     return (
         <div>

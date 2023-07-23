@@ -1,26 +1,30 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
 
-const HomePage = lazy(() => import("pages/HomePage/HomePage"));
-const MovieDetails = lazy(() => import("pages/MovieDetails/MovieDetails"));
-const MoviesPage = lazy(() => import("pages/MoviesPage/MoviesPage"));
+const HomePage = lazy(() => import('pages/HomePage/HomePage'));
+const MovieDetails = lazy(() => import('pages/MovieDetails/MovieDetails'));
+const MoviesPage = lazy(() => import('pages/MoviesPage/MoviesPage'));
 
-const Reviews = lazy(() => new Promise((resolve, reject) => {
-  import("./Reviews/Reviews")
-    .then(result => resolve(result.default ? result : { default: result }))
-    .catch(reject)
-}));
+const Reviews = lazy(
+  () =>
+    new Promise((resolve, reject) => {
+      import('./Reviews/Reviews')
+        .then(result => resolve(result.default ? result : { default: result }))
+        .catch(reject);
+    })
+);
 
-const Cast = lazy(() => new Promise((resolve, reject) => {
-  import("./Cast/Cast")
-    .then(result => resolve(result.default ? result : { default: result }))
-    .catch(reject)
-}));
+const Cast = lazy(
+  () =>
+    new Promise((resolve, reject) => {
+      import('./Cast/Cast')
+        .then(result => resolve(result.default ? result : { default: result }))
+        .catch(reject);
+    })
+);
 
 export const App = () => {
   return (
-
-
     <BrowserRouter basename="goit-react-hw-05-movies">
       <div>
         <header>
@@ -49,6 +53,5 @@ export const App = () => {
         </Suspense>
       </div>
     </BrowserRouter>
-
   );
 };

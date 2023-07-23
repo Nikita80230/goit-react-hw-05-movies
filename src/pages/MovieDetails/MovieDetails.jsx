@@ -9,8 +9,7 @@ const MovieDetails = () => {
     const { movieId } = useParams();
     const [movie, setMovie] = useState({});
     const location = useLocation();
-    const backLinkHref = location?.state?.from ?? '/'
-
+    const backLinkHref = location?.state?.from ?? '/';
 
     useEffect(() => {
         if (!movieId) return;
@@ -39,11 +38,17 @@ const MovieDetails = () => {
             <br />
             <br />
 
-            <Link state={{ from: backLinkHref }} to={location.pathname.includes('cast') ? '' : 'cast'}>
+            <Link
+                state={{ from: backLinkHref }}
+                to={location.pathname.includes('cast') ? '' : 'cast'}
+            >
                 <h3>CAST</h3>
             </Link>
 
-            <Link state={{ from: backLinkHref }} to={location.pathname.includes('reviews') ? '' : 'reviews'}>
+            <Link
+                state={{ from: backLinkHref }}
+                to={location.pathname.includes('reviews') ? '' : 'reviews'}
+            >
                 <h3>REVIEWS</h3>
             </Link>
             <Suspense fallback={<div>Loading subpage...</div>}>

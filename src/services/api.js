@@ -33,9 +33,3 @@ export async function getMoviesReviewsById(id) {
   const { data } = await instance.get(`/movie/${id}/reviews`);
   return data;
 }
-// https://api.themoviedb.org/3/movie/{movie_id}/reviews
-// q: input,
-// image_type: 'photo',
-// orientation: 'horizontal',
-// safesearch: 'true',
-// page: page,

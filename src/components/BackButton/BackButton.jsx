@@ -1,10 +1,8 @@
-import React from 'react'
-import css from './BackButton.module.css'
+import React from 'react';
+import css from './BackButton.module.css';
 
 const BackButton = () => {
-    return (
-        <button className={css.backBtn}> Go back</button>
-    )
-}
+    return <button className={css.backBtn}> Go back</button>;
+};
 
-export default BackButton
+export default BackButton;
